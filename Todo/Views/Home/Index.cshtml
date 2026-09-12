@@ -1,0 +1,75 @@
+﻿@model Todo.Models.HomeIndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    int counter = 0;
+}
+
+
+<div class="create sticky-lg-top" >
+    <form asp-action="CreateTask">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="NewTask.Description" class="control-label fw-bold">New Task</label>
+            <input asp-for="NewTask.Description" class="form-control" />
+            <span asp-validation-for="NewTask.Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div class=" d-flex gap-4 align-items-start">
+    <div>
+
+    <table>
+
+    @foreach(var task in Model.Tasks!)
+    {
+            <tr>
+                    <td>
+                        @(++counter))
+                @* @Html.DisplayFor(item => task.TaskId))  *@
+            </td>
+
+            <td>
+                @Html.DisplayFor(item => task.Description)
+            </td>
+            <td>
+                @* @(task.IsCompleted ? "Done" : "Pending") *@
+                @Html.DisplayFor(item => task.IsCompleted)
+                <input type="checkbox" checked="checked" />
+                <input type="checkbox"  />
+
+                
+            </td>
+            <td>
+                <form asp-action="UpdateStatus" asp-controller="Home" method="post" style="display:inline" >
+                    <input type="hidden" name="id" value="@task.TaskId" />
+                    <button type="submit" class="btn btn-success btn-sm">@(task.IsCompleted ? "Undo" : "Done")</button>
+                </form>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-primary btn-sm">Edit</a>
+            </td>
+            <td>
+                <form asp-action="DeleteTask" asp-controller="Home" method="post" style="display: inline" onsubmit="return confirm('Are you sure that you want delete this task')">
+                    <input type="hidden" name="taskId" value="@task.TaskId" /> 
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+            </tr>
+            <tr></tr>
+            
+
+            
+    }
+
+    </table>
+    </div>
+
+</div>
+    <div style="width: 50px; height: 250px; border: 1px solid black;"></div>
+
+
+    
