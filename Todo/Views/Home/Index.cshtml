@@ -1,7 +1,28 @@
 ﻿@model Todo.Models.HomeIndexViewModel
 @{
     ViewData["Title"] = "Home Page";
-    int counter = 0;
+    int completedCounter = 0,unCompletedCounter = 0;
+
+    TaskItem[] completedTasks = Model.Tasks!.Where(t => t.IsCompleted).ToArray();
+    TaskItem[] uncompletedTasks = Model.Tasks!.Where(t => t.IsCompleted == false).ToArray();
+
+    foreach(TaskItem taskItem in Model.Tasks!)
+    {
+        taskItem.taskPrint();
+    }
+    Console.WriteLine("comleted tasks>>>>>>>>>>>>>>>>");
+    foreach(TaskItem taskItem in completedTasks)
+    {
+        taskItem.taskPrint();
+
+    }
+    Console.WriteLine("uncomplete tasks>>>>>>>>>>>>>>>");
+    foreach(var taskItem in uncompletedTasks)
+    {
+        taskItem.taskPrint();
+    }
+
+
 }
 
 
@@ -19,6 +40,61 @@
     </form>
 </div>
 
+
+
+
+<div class="d-flex align-content-center gap-5">
+    <div class="uncompleted-tasks">
+        <table>
+
+        @foreach(TaskItem task in uncompletedTasks)
+        {
+            <tr>
+                <td>
+                    @(++unCompletedCounter))
+                </td>
+                <td>
+                    @Html.DisplayFor(item => task.Description);
+                </td>
+                <td>
+                    <form asp-action="UpdateStatus" asp-controller="Home" method="post" style="display:inline">
+                        <input type="hidden" name="id" value="@task.TaskId" />
+                        <button type="submit" class="btn btn-success btn-sm">@(task.IsCompleted ? "Undo" : "Done")</button>
+                    </form>
+                </td>
+            </tr>
+            
+        }
+        </table>
+    </div>
+
+    <div class="completed-tasks">
+        <table>
+
+            @foreach (TaskItem task in completedTasks)
+            {
+                <tr>
+                    <td>
+                        @(++completedCounter))
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => task.Description);
+                    </td>
+                    <td>
+                        <form asp-action="UpdateStatus" asp-controller="Home" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@task.TaskId" />
+                            <button type="submit" class="btn btn-success btn-sm">@(task.IsCompleted ? "Undo" : "Done")</button>
+                        </form>
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+
+</div>
+@*
+
 <div class=" d-flex gap-4 align-items-start">
     <div>
 
@@ -29,14 +105,14 @@
             <tr>
                     <td>
                         @(++counter))
-                @* @Html.DisplayFor(item => task.TaskId))  *@
+                @* @Html.DisplayFor(item => task.TaskId))  comment end here
             </td>
 
             <td>
                 @Html.DisplayFor(item => task.Description)
             </td>
             <td>
-                @* @(task.IsCompleted ? "Done" : "Pending") *@
+                @* @(task.IsCompleted ? "Done" : "Pending") comment end here
                 @Html.DisplayFor(item => task.IsCompleted)
                 <input type="checkbox" checked="checked" />
                 <input type="checkbox"  />
@@ -69,6 +145,7 @@
     </div>
 
 </div>
+*@
     <div style="width: 50px; height: 250px; border: 1px solid black;"></div>
 
 

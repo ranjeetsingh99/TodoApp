@@ -15,7 +15,7 @@ namespace Todo.Models
 
         public void taskPrint()
         {
-            string taskid = "task id = " + this.TaskId + "........................\ntask des = "+ this.Description+ "................\n";
+            string taskid = "task id = " + this.TaskId + "........................\ntask des = "+ this.Description+ "................\n" + this.IsCompleted + "................\n";
             Console.WriteLine(taskid);
         }
     }

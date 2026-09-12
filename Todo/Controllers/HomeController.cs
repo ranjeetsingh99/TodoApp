@@ -30,7 +30,6 @@ public class HomeController : Controller
     public async Task<IActionResult> UpdateStatus(int id)
     {
         var task = await taskDb.Tasks.FindAsync(id);
-        task!.taskPrint();
         if (task == null)
             return NotFound();
 
@@ -47,6 +46,7 @@ public class HomeController : Controller
 
         return RedirectToAction("Index"); 
     }
+    [ValidateAntiForgeryToken]
     [HttpPost]
     public async Task<IActionResult> CreateTask(HomeIndexViewModel task)
     {
@@ -77,7 +77,7 @@ public class HomeController : Controller
         
         return View(task);
     }
-
+    [ValidateAntiForgeryToken]
     [HttpPost]
     public async Task<IActionResult> Edit(int taskId, TaskItem task)
     {
@@ -91,7 +91,7 @@ public class HomeController : Controller
         }
         return View(task);
     }
-
+    [ValidateAntiForgeryToken]
     [HttpPost]
     public async Task<IActionResult> DeleteTask(int taskId)
     {
