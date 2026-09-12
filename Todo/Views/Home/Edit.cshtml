@@ -4,7 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-Task Id: @Model.TaskId
+Task Id: @Model.TaskId Status: @Html.DisplayFor(i => Model.IsCompleted)
+
+
 <form asp-action="Edit" >
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="TaskId" />
@@ -14,7 +16,15 @@ Task Id: @Model.TaskId
         <span asp-validation-for="Description" class="text-danger"></span>
 
     </div>
+
+
     <div class="form-group">
         <input type="submit" value="Edit" class="btn btn-primary" />
     </div>
+  
 </form>
+<br /> 
+<form asp-action="DeleteTask" asp-controller="Home" method="post" style="display: inline" onsubmit="return confirm('Are you sure that you want delete this task')">
+        <input type="hidden" name="taskId" value="@Model.TaskId" />
+        <button type="submit" class="btn btn-danger ">Delete</button>
+    </form>

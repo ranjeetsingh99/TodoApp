@@ -95,6 +95,8 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> DeleteTask(int taskId)
     {
+
+        Console.WriteLine("Enter delete post...............");
         var taskToBeDeleted = await taskDb.Tasks.FindAsync(taskId);
 
         if(taskToBeDeleted == null)
@@ -102,6 +104,7 @@ public class HomeController : Controller
             Console.WriteLine("task to be deleted id ");
             return RedirectToAction("Index");
         }
+
 
         taskToBeDeleted!.taskPrint();
         taskDb.Tasks.Remove(taskToBeDeleted);

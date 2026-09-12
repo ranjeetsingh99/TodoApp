@@ -6,27 +6,27 @@
     TaskItem[] completedTasks = Model.Tasks!.Where(t => t.IsCompleted).ToArray();
     TaskItem[] uncompletedTasks = Model.Tasks!.Where(t => t.IsCompleted == false).ToArray();
 
-    foreach(TaskItem taskItem in Model.Tasks!)
-    {
-        taskItem.taskPrint();
-    }
-    Console.WriteLine("comleted tasks>>>>>>>>>>>>>>>>");
-    foreach(TaskItem taskItem in completedTasks)
-    {
-        taskItem.taskPrint();
+    // foreach(TaskItem taskItem in Model.Tasks!)
+    // {
+    //     taskItem.taskPrint();
+    // }
+    // Console.WriteLine("comleted tasks>>>>>>>>>>>>>>>>");
+    // foreach(TaskItem taskItem in completedTasks)
+    // {
+    //     taskItem.taskPrint();
 
-    }
-    Console.WriteLine("uncomplete tasks>>>>>>>>>>>>>>>");
-    foreach(var taskItem in uncompletedTasks)
-    {
-        taskItem.taskPrint();
-    }
+    // }
+    // Console.WriteLine("uncomplete tasks>>>>>>>>>>>>>>>");
+    // foreach(var taskItem in uncompletedTasks)
+    // {
+    //     taskItem.taskPrint();
+    // }
 
 
 }
 
 
-<div class="create sticky-lg-top" >
+<div class="create sticky-top " style="background-color:white">
     <form asp-action="CreateTask">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -43,7 +43,7 @@
 
 
 
-<div class="d-flex align-content-center gap-5">
+<div class="d-lg-flex d-md-flex align-content-center gap-5">
     <div class="uncompleted-tasks">
         <table>
 
@@ -54,7 +54,10 @@
                     @(++unCompletedCounter))
                 </td>
                 <td>
-                    @Html.DisplayFor(item => task.Description);
+                    <a asp-action="Edit" asp-controller="Home" asp-route-id="@task.TaskId" class="plain-link">
+                    @Html.DisplayFor(item => task.Description)
+                    </a>
+
                 </td>
                 <td>
                     <form asp-action="UpdateStatus" asp-controller="Home" method="post" style="display:inline">
@@ -78,7 +81,9 @@
                         @(++completedCounter))
                     </td>
                     <td>
-                        @Html.DisplayFor(item => task.Description);
+                        <a asp-action="Edit" asp-controller="Home" asp-route-id="@task.TaskId" class="plain-link">
+                            @Html.DisplayFor(item => task.Description)
+                        </a>
                     </td>
                     <td>
                         <form asp-action="UpdateStatus" asp-controller="Home" method="post" style="display:inline">
@@ -146,7 +151,7 @@
 
 </div>
 *@
-    <div style="width: 50px; height: 250px; border: 1px solid black;"></div>
+    <div style="width: 50px; height: 500px; border: 1px solid black;"></div>
 
 
     
