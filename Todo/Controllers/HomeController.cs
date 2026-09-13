@@ -41,7 +41,8 @@ public class HomeController : Controller
         {
             task.IsCompleted = true;
         }
-
+        task.UpdatedAt = DateTime.Now;
+        task.taskPrint();
         await taskDb.SaveChangesAsync();
 
         return RedirectToAction("Index"); 
@@ -81,11 +82,20 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(int taskId, TaskItem task)
     {
-        Console.WriteLine("Enter edit post --------------------------------"+taskId);
+        //Console.WriteLine("Enter edit post --------------------------------"+taskId+ModelState.IsValid);
         task.taskPrint();
+        if(taskId != task.TaskId)
+        {
+            return RedirectToAction("Index");
+        }
+        TaskItem? finalEdit = await taskDb.Tasks.FindAsync(task.TaskId);
+
 
         if (ModelState.IsValid) {
-            taskDb.Tasks.Update(task);
+            finalEdit!.UpdatedAt = DateTime.Now;
+            finalEdit!.Description = task.Description;
+            //task.taskPrint();
+            taskDb.Tasks.Update(finalEdit);
             await taskDb.SaveChangesAsync();
             return RedirectToAction("Index");
         }

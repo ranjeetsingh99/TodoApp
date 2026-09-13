@@ -12,14 +12,14 @@ namespace Todo.Models
         public string? Description { get; set; }
         public bool IsCompleted { get; set; } = false;
 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         public void taskPrint()
         {
-            string taskid = "task id = " + this.TaskId + "........................\ntask des = "+ this.Description+ "................\n" + this.IsCompleted + "................\n";
+            string taskid = "task id = " + this.TaskId + "........................\ntask des = "+ this.Description+ "................\n" + this.IsCompleted + "................\n" +this.CreatedAt + "................\n" + this.UpdatedAt + "................\n";
             Console.WriteLine(taskid);
         }
-    }
-
-    
+    }    
 }
     

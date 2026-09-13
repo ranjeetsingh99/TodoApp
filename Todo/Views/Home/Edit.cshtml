@@ -2,9 +2,14 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Model.taskPrint();
 }
 
 Task Id: @Model.TaskId Status: @Html.DisplayFor(i => Model.IsCompleted)
+<br />
+Created At: @Model.CreatedAt
+<br/>
+Updated At: @Model.UpdatedAt
 
 
 <form asp-action="Edit" >
@@ -24,7 +29,8 @@ Task Id: @Model.TaskId Status: @Html.DisplayFor(i => Model.IsCompleted)
   
 </form>
 <br /> 
+
 <form asp-action="DeleteTask" asp-controller="Home" method="post" style="display: inline" onsubmit="return confirm('Are you sure that you want delete this task')">
         <input type="hidden" name="taskId" value="@Model.TaskId" />
         <button type="submit" class="btn btn-danger ">Delete</button>
-    </form>
+</form>

@@ -42,10 +42,12 @@
 
 
 
+<br />
 
-<div class="d-lg-flex d-md-flex align-content-center gap-5">
-    <div class="uncompleted-tasks">
-        <table>
+<div class="d-flex   align-content-center gap-lg-5 gap-md-5 gap-sm-3">
+    <div class="uncompleted-tasks card" style="display:inline; padding:1rem">
+        <h2 class="card-title">To do </h2>
+        <table class="card-body">
 
         @foreach(TaskItem task in uncompletedTasks)
         {
@@ -71,9 +73,9 @@
         </table>
     </div>
 
-    <div class="completed-tasks">
-        <table>
-
+    <div class="completed-tasks card" style="display:inline ;padding:1rem">
+            <h2 class="card-title">Completed Tasks </h2>
+        <table class="card-body">
             @foreach (TaskItem task in completedTasks)
             {
                 <tr>
