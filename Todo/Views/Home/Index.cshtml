@@ -3,8 +3,8 @@
     ViewData["Title"] = "Home Page";
     int completedCounter = 0,unCompletedCounter = 0;
 
-    TaskItem[] completedTasks = Model.Tasks!.Where(t => t.IsCompleted).ToArray();
-    TaskItem[] uncompletedTasks = Model.Tasks!.Where(t => t.IsCompleted == false).ToArray();
+    TaskItem[] completedTasks = Model.Tasks!.Where(t => t.IsCompleted).OrderByDescending(t => t.UpdatedAt).ToArray();
+    TaskItem[] uncompletedTasks = Model.Tasks!.Where(t => t.IsCompleted == false).OrderByDescending(t => t.UpdatedAt).ToArray();
 
     // foreach(TaskItem taskItem in Model.Tasks!)
     // {
